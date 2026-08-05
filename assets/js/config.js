@@ -13,7 +13,8 @@ const CONFIG = {
   // Hanya 2 email ini yang boleh login pakai Google
   emailDiizinkan: [
     "sahruldara31@gmail.com",
-    "GANTI_DENGAN_EMAIL_DARA@gmail.com"   // ← ganti dengan email Dara ya!
+    "daralthfna@gmail.com",
+    "sahrul22032006@gmail.com"  // ← ganti dengan email Dara ya!
   ],
 
   // Nama folder penyimpanan di Google Drive (dibuat otomatis)
