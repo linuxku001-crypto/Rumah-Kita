@@ -7,22 +7,22 @@ const CONFIG = {
   tanggalJadian : "2026-07-31",
   password      : "aku sayang kamu",
 
-  // Client ID Google (dipakai untuk login DAN Google Drive)
   googleClientId: "262812287582-jn0a6730fmnkaned34qqai4hrjm8ph7k.apps.googleusercontent.com",
 
-  // Hanya 2 email ini yang boleh login pakai Google
+  // SEMUA akun yang boleh masuk ke rumah (sesuai test users kamu)
   emailDiizinkan: [
     "sahruldara31@gmail.com",
     "daralthfna@gmail.com",
-    "sahrul22032006@gmail.com"  // ← ganti dengan email Dara ya!
+    "sahrul22032006@gmail.com"
   ],
 
-  // Nama folder penyimpanan di Google Drive (dibuat otomatis)
+  // Drive penyimpanan utama (folder dibuat di akun ini)
+  emailPemilikDrive: "sahruldara31@gmail.com",
+
   driveFolderName: "Momen Kita 🤍",
 
-  // Jam otomatis akurat selamanya (tanpa setting manual)
   zonaWaktu: {
-    sulawesi: "Asia/Makassar",   // WITA — Sahrul
-    aceh    : "Asia/Jakarta"     // WIB  — Dara (Aceh = WIB)
+    sulawesi: "Asia/Makassar",
+    aceh    : "Asia/Jakarta"
   }
 };
