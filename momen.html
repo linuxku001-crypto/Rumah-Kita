@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momen Kita — Sahrul ♥ Dara</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="home">
+<script> if (!localStorage.getItem("sd_login")) location.replace("index.html"); </script>
+
+<header class="home-header">
+  <span class="logo">📖 Momen Kita</span>
+  <span>
+    <a href="home.html" class="btn btn-ghost">← Rumah</a>
+    <button id="btnKeluar" class="btn btn-ghost">Keluar</button>
+  </span>
+</header>
+
+<main class="home-main">
+  <section class="surat">
+    <h2>Album Momen Kita 🤍</h2>
+    <p id="statusDrive">Semua kenangan kita tersimpan aman di Google Drive, cuma kita yang bisa lihat.</p>
+    <button id="btnSambung" class="btn btn-primary">🔗 Sambungkan Google Drive</button>
+  </section>
+
+  <section class="surat" id="panelUpload" hidden>
+    <h2>Abadikan momen baru ❤️</h2>
+    <form id="formMomen">
+      <label for="fileMomen">Foto / video (boleh kosong)</label>
+      <input type="file" id="fileMomen" accept="image/*,video/*">
+      <label for="caption">Caption / cerita</label>
+      <textarea id="caption" rows="3" placeholder="Tulis cerita kita di sini… atau sekedar 'aku kangen kamu' juga boleh 🤍"></textarea>
+      <button class="btn btn-primary" type="submit">Simpan Momen ❤️</button>
+      <p id="statusUpload" class="muted"></p>
+    </form>
+  </section>
+
+  <section id="liniMasa" class="lini-masa"></section>
+</main>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/drive.js"></script>
+<script src="assets/js/momen.js"></script>
+<script>
+  document.getElementById("btnKeluar").onclick = () => {
+    localStorage.removeItem("sd_login"); location.href = "index.html";
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rumah Kita — Sahrul ♥ Dara</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="home">
+<script> if (!localStorage.getItem("sd_login")) location.replace("index.html"); </script>
+
+<header class="home-header">
+  <span class="logo">Sahrul <span class="heart">♥</span> Dara</span>
+  <button id="btnKeluar" class="btn btn-ghost">Keluar</button>
+</header>
+
+<main class="home-main">
+
+  <!-- Jam ganda: waktu kalian berdua -->
+  <section class="jam-grid">
+    <div class="jam-card">
+      <p class="jam-label">🌙 Waktu Dara — Aceh (WIB)</p>
+      <p class="jam-angka" id="jamAceh">--:--:--</p>
+      <p class="jam-tanggal" id="jamAcehTgl"></p>
+    </div>
+    <div class="jam-card">
+      <p class="jam-label">🌤️ Waktu Sahrul — Sulawesi (WITA)</p>
+      <p class="jam-angka" id="jamSulawesi">--:--:--</p>
+      <p class="jam-tanggal" id="jamSulawesiTgl"></p>
+    </div>
+  </section>
+  <p class="hari-bersama" id="hitungHari"></p>
+  <p class="jam-note">Beda satu jam di jam — nggak pernah beda di hati.</p>
+
+  <!-- Surat untuk Dara -->
+  <section class="surat">
+    <h2>Untuk Dara, baca pelan-pelan ya 🤍</h2>
+    <p>Dara sayang, aku tahu jarak antara Sulawesi dan Aceh itu jauh banget. Ada laut, ada pulau, ada rindu yang kadang terasa berat banget dipikul sendiri. Kadang kamu pasti merasa sendiri. Kadang kamu butuh dipeluk, tapi aku cuma bisa hadir lewat layar. Maafin aku untuk semua momen itu ya.</p>
+    <p>Tapi sayang, dengarkan aku baik-baik: <strong>aku tuh selalu ada</strong>. Di setiap pesan yang kamu kirim, di setiap telepon yang kamu tunggu, di setiap doa yang diam-diam aku sebut nama kamu di dalamnya. Kamu nggak pernah sendiri, karena separuh hatiku selalu tinggal di kamu.</p>
+    <p><strong>Aku sayang kamu banget.</strong> Lebih dari apa yang sanggup ditulis oleh halaman ini. Website ini bukan cuma tempat menyimpan foto dan video — ini rumah kecil kita. Tempat kita pulang kalau rindu, tempat bukti bahwa kita selalu berjuang bersama melawan jarak, sampai nanti kita tertawa bareng mengenang hari-hari ini.</p>
+    <p>Tunggu aku ya. Sampai jarak menyerah, sampai langit Aceh dan Sulawesi terasa seperti satu atap — atap rumah kita sendiri. 🤍</p>
+    <p class="surat-ttd">— Sahrul, yang selalu sayang kamu</p>
+  </section>
+
+  <!-- Pintu ke album momen -->
+  <a href="momen.html" class="btn btn-primary" style="display:block;width:max-content;margin:34px auto 0">📖 Buka Album Momen Kita</a>
+
+</main>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/clock.js"></script>
+<script>
+  document.getElementById("btnKeluar").onclick = () => {
+    localStorage.removeItem("sd_login");
+    location.href = "index.html";
+  };
+</script>
+</body>
+</html>

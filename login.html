@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk — Sahrul ♥ Dara</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="login-page">
+
+  <div class="login-card">
+    <h2>Halo, sayang 👋</h2>
+    <p class="muted">Ruang ini cuma untuk kita berdua.<br>Masuk ya — rindu sudah menunggumu di dalam.</p>
+
+    <form id="formPassword">
+      <label for="password">Kata kunci kita</label>
+      <input type="password" id="password" placeholder="tulis kata kunci kita…" autocomplete="off">
+      <button type="submit" class="btn btn-primary btn-full">Buka Pintu ❤️</button>
+      <p id="pesanSalah" class="error" hidden>Yakin? Ingat lagi ya kata kunci kita… 🥺</p>
+    </form>
+
+    <div class="divider"><span>atau masuk dengan</span></div>
+    <div id="gButton" class="google-btn-wrap"></div>
+
+    <a href="index.html" class="back">← kembali</a>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
