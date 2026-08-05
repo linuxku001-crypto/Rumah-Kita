@@ -6,6 +6,17 @@
 <title>Sahrul ♥ Dara — Ruang Kita</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* nama bertumpuk: Sahrul → ♥ → Dara */
+  .landing-content h1{
+    display:flex; flex-direction:column; align-items:center;
+    gap:.08em; line-height:1.12; font-size:clamp(2rem,7vw,3.9rem);
+  }
+  .landing-content h1 .heart{
+    font-size:.85em; margin:.02em 0;
+    text-shadow:0 0 30px rgba(255,107,107,.65);
+  }
+</style>
 </head>
 <body class="landing">
 
@@ -16,11 +27,25 @@
 
   <main class="landing-content">
     <p class="landing-small">sebuah rumah kecil untuk kita berdua</p>
-    <h1> Sahrul <span class="heart">♥</span> Dara </h1>
-    <p class="landing-quote">"Jarak Sulawesi–Aceh memang jauh,<br>tapi hati kita nggak pernah punya jarak."</p>
+
+    <h1>
+      <span id="namaAtas">Sahrul Saputra</span>
+      <span class="heart">♥</span>
+      <span id="namaBawah">Dara Luthfina</span>
+    </h1>
+
+    <p class="landing-quote">"Jaraknya Sulawesi–Aceh memang jauh,<br>tapi hati kita nggak pernah punya jarak."</p>
     <a href="login.html" class="btn btn-primary">🔑 Masuk ke Ruang Kita</a>
     <p class="landing-note">khusus kita berdua ya, sayang ❤️</p>
   </main>
 
+  <script src="assets/js/config.js"></script>
+  <script>
+    // nama otomatis dari config.js, dirapikan kapital tiap awal kata
+    const rapi = n => n.replace(/\w\S*/g, t => t[0].toUpperCase() + t.slice(1));
+    document.getElementById("namaAtas").textContent  = rapi(CONFIG.namaKamu);
+    document.getElementById("namaBawah").textContent = rapi(CONFIG.namaDia);
+    document.title = rapi(CONFIG.namaKamu) + " ♥ " + rapi(CONFIG.namaDia);
+  </script>
 </body>
 </html>
