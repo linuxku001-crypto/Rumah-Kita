@@ -10,7 +10,7 @@ function tungguGS(cb, coba = 0) {
 function sambungDrive(setelahSiap) {
   tungguGS(() => {
     const tc = google.accounts.oauth2.initTokenClient({
-      client_id: CONFIG.googleClientId,   // ← Client ID yang sama
+      client_id: CONFIG.googleClientId,
       scope: DRIVE_SCOPE,
       callback: (resp) => {
         if (resp.error) { alert("Gagal terhubung: " + resp.error); return; }
@@ -31,47 +31,49 @@ async function emailSaya() {
 
 async function apiDrive(url, opsi = {}) {
   const res = await fetch("https://www.googleapis.com/drive/v3/" + url, {
-    ...opi,
-    headers: { Authorization: "Bearer " + tokenDrive, ...(opi.headers || {}) }
+    ...opsi,
+    headers: { Authorization: "Bearer " + tokenDrive, ...(opsi.headers || {}) }
   });
   if (!res.ok) throw new Error((await res.text()).slice(0, 200));
   return res.json();
 }
 
-// Cari folder "Momen Kita 🤍". Kalau belum ada & yang login Sahrul → buat + auto-share ke Dara.
 async function dapatkanFolder() {
   const q = encodeURIComponent(`name='${CONFIG.driveFolderName}' and mimeType='application/vnd.google-apps.folder' and trashed=false`);
   const data = await apiDrive(`files?q=${q}&fields=files(id,name)`);
   if (data.files.length) return data.files[0].id;
 
   const saya = await emailSaya();
-  if (saya !== CONFIG.emailDiizinkan[0].toLowerCase()) {
-    throw new Error("Folder belum ada. Sahrul harus buka halaman Momen & sambung Drive lebih dulu ya 🥺");
+  if (saya !== CONFIG.emailPemilikDrive.toLowerCase()) {
+    throw new Error("Folder belum ada. Sahrul harus sambung Drive lebih dulu ya 🥺");
   }
   const buat = await apiDrive("files", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name: CONFIG.driveFolderName, mimeType: "application/vnd.google-apps.folder" })
   });
-  const pasangan = CONFIG.emailDiizinkan.find(e => e.toLowerCase() !== saya && !e.startsWith("GANTI_"));
-  if (pasangan) {
-    await fetch(`https://www.googleapis.com/drive/v3/files/${buat.id}/permissions`, {
-      method: "POST",
-      headers: { Authorization: "Bearer " + tokenDrive, "Content-Type": "application/json" },
-      body: JSON.stringify({ role: "writer", type: "user", emailAddress: pasangan })
-    });
+  // bagikan otomatis ke semua email kita yang lain
+  for (const email of CONFIG.emailDiizinkan) {
+    if (email.toLowerCase() !== saya && !email.startsWith("GANTI_")) {
+      await fetch(`https://www.googleapis.com/drive/v3/files/${buat.id}/permissions`, {
+        method: "POST",
+        headers: { Authorization: "Bearer " + tokenDrive, "Content-Type": "application/json" },
+        body: JSON.stringify({ role: "writer", type: "user", emailAddress: email })
+      });
+    }
   }
   return buat.id;
 }
 
-// Upload foto/video/cerita + caption, lengkap mendukung file besar (resumable)
-async function uploadMomen(file, caption, namaFile) {
+async function uploadMomen(file, caption, namaFile, olehNama, waktuIso) {
   const folderId = await dapatkanFolder();
-  const oleh = await emailSaya();
   const metadata = {
     name: namaFile,
     parents: [folderId],
-    description: JSON.stringify({ caption, oleh, waktu: new Date().toISOString() })
+    description: JSON.stringify({
+      caption, oleh: olehNama, likes: 0,
+      waktu: waktuIso || new Date().toISOString()
+    })
   };
   const res = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable", {
     method: "POST",
@@ -87,7 +89,6 @@ async function uploadMomen(file, caption, namaFile) {
   });
   if (!put.ok) throw new Error((await put.text()).slice(0, 200));
   const hasil = await put.json();
-  // biar bisa ditampilkan di website kita
   await fetch(`https://www.googleapis.com/drive/v3/files/${hasil.id}/permissions`, {
     method: "POST",
     headers: { Authorization: "Bearer " + tokenDrive, "Content-Type": "application/json" },
@@ -96,7 +97,6 @@ async function uploadMomen(file, caption, namaFile) {
   return hasil.id;
 }
 
-// Ambil semua momen, urut dari yang TERBARU (cara lihat momen sebelumnya: tinggal scroll ⬇)
 async function daftarMomen(folderId) {
   const q = encodeURIComponent(`'${folderId}' in parents and trashed=false`);
   const data = await apiDrive(`files?q=${q}&orderBy=createdTime desc&pageSize=1000&fields=files(id,name,mimeType,description,createdTime)`);
