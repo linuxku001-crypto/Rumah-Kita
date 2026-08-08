@@ -14,6 +14,7 @@ const CONFIG = {
     "sahruldara31@gmail.com",
     "daralthfna@gmail.com",
     "sahrul22032006@gmail.com"
+    "saputrasahrir@gmai.com",
   ],
 
   // Drive penyimpanan utama (folder dibuat di akun ini)
